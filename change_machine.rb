@@ -5,7 +5,20 @@ require "rspec"
 
 class ChangeMachine
   def convert_value_to_coins(money)
-    return [1]
+    change = []
+    while money > 0
+      if money >= 10
+        change << 10
+        money -= 10
+      elsif money >= 5
+        change << 5
+        money -= 5
+      else
+        change << 1
+        money -= 1
+      end
+    end
+    return change
   end
 end
 
@@ -15,6 +28,18 @@ RSpec.describe ChangeMachine do
       machine = ChangeMachine.new
       result = machine.convert_value_to_coins(1)
       expect(result).to eq([1])
+    end
+
+    it "should return [5] when given 5" do
+      machine = ChangeMachine.new
+      result = machine.convert_value_to_coins(5)
+      expect(result).to eq([5])
+    end
+
+    it "should return [10] when given 10" do
+      machine = ChangeMachine.new
+      result = machine.convert_value_to_coins(10)
+      expect(result).to eq([10])
     end
   end
 end
