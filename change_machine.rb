@@ -7,7 +7,10 @@ class ChangeMachine
   def convert_value_to_coins(money)
     change = []
     while money > 0
-      if money >= 10
+      if money >= 25
+        change << 25
+        money -= 25
+      elsif money >= 10
         change << 10
         money -= 10
       elsif money >= 5
@@ -40,6 +43,12 @@ RSpec.describe ChangeMachine do
       machine = ChangeMachine.new
       result = machine.convert_value_to_coins(10)
       expect(result).to eq([10])
+    end
+
+    it "should return [25] when given 25" do
+      machine = ChangeMachine.new
+      result = machine.convert_value_to_coins(25)
+      expect(result).to eq([25])
     end
   end
 end
