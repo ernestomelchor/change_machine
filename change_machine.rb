@@ -42,5 +42,11 @@ RSpec.describe ChangeMachine do
       result = machine.convert_value_to_coins(25)
       expect(result).to eq([25])
     end
+
+    it "should return [25, 25, 25, 10, 1, 1, 1] when given 88" do
+      machine = ChangeMachine.new
+      result = machine.convert_value_to_coins(88)
+      expect(result).to eq([25, 25, 25, 10, 1, 1, 1])
+    end
   end
 end
