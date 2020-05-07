@@ -4,24 +4,16 @@
 require "rspec"
 
 class ChangeMachine
-  def convert_value_to_coins(money)
-    change = []
-    while money > 0
-      if money >= 25
-        change << 25
-        money -= 25
-      elsif money >= 10
-        change << 10
-        money -= 10
-      elsif money >= 5
-        change << 5
-        money -= 5
-      else
-        change << 1
-        money -= 1
+  def convert_value_to_coins(value)
+    denominations = [25, 10, 5, 1]
+    coins = []
+    denominations.each do |denomination|
+      while value >= denomination
+        coins << denomination
+        value = value - denomination
       end
     end
-    return change
+    coins
   end
 end
 
